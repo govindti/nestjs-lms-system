@@ -1,0 +1,27 @@
+import { Injectable } from '@nestjs/common';
+import { UserService } from 'src/user/user.service';
+import { RegisterDto } from './dto/registerUser.dto';
+import bcrypt from 'bcrypt'
+
+@Injectable()
+export class AuthService {
+    constructor(private readonly userService: UserService) { }
+
+    async registerUser(registerUserDto: RegisterDto) {
+        console.log('first', registerUserDto)
+
+        const saltRounds = 10
+        const hash = await bcrypt.hash(registerUserDto.password, saltRounds);
+        /**
+         * 1. check if user already exists or not
+         * 2. hash password
+         * 3. store the user into db
+         * 4. genrate JWT token
+         * 5. send token into response
+         */
+
+        const user = await this.userService.createUser({ ...registerUserDto, password: hash });
+        console.log('user', user)
+        return {}
+    }
+}
