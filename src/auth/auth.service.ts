@@ -8,8 +8,7 @@ export class AuthService {
     constructor(private readonly userService: UserService) { }
 
     async registerUser(registerUserDto: RegisterDto) {
-        console.log('first', registerUserDto)
-
+        
         const saltRounds = 10
         const hash = await bcrypt.hash(registerUserDto.password, saltRounds);
         /**
