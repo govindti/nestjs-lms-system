@@ -11,4 +11,14 @@ export class AuthController {
         const token = await this.authService.registerUser(registerUserDto)
         return token
     }
+
+    @Post('login')
+    async login(){
+        // todo: implement this
+    }
+    /**
+     * 1. Receive email & password
+     * 2. Match the email & hashed password using compare method bcyrpt lib
+     * 3. Genrate JWT token and return
+     */
 }
